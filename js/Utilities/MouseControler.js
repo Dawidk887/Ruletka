@@ -1,7 +1,7 @@
- class MouseControler {
+export default class MouseControler {
 
     constructor() {
-        
+
         this.watchedElements = []
     }
 
@@ -9,12 +9,11 @@
         this.watchedElements.push(element)
     }
 
-    verify(event, canvas) 
-    {
+    verifyHover(event, canvas) {
         const isElemntHover = this.watchedElements.some(function (element) {
             return element.onHover(event.clientX - canvas.getBoundingClientRect().left, event.clientY - canvas.getBoundingClientRect().top)
         }
-    )
+        )
         if (isElemntHover) {
             canvas.style = 'cursor:pointer'
         }
@@ -23,4 +22,11 @@
         }
 
     }
+
+    verifyClick(event, canvas) {
+         this.watchedElements.some(function (element) {
+            return element.onClick(event.clientX - canvas.getBoundingClientRect().left, event.clientY - canvas.getBoundingClientRect().top)
+        })
+    }
+
 }
